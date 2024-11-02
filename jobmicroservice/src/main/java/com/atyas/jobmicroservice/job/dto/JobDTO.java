@@ -1,9 +1,11 @@
 package com.atyas.jobmicroservice.job.dto;
 
-import com.atyas.jobmicroservice.job.Job;
 import com.atyas.jobmicroservice.job.external.Company;
+import com.atyas.jobmicroservice.job.external.Review;
 
-public class JobWithCompanyDTO {
+import java.util.List;
+
+public class JobDTO {
     private Long id;
     private String title;
     private String description;
@@ -12,6 +14,15 @@ public class JobWithCompanyDTO {
     private String location;
 
     private Company company;
+    private List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public Long getId() {
         return id;
