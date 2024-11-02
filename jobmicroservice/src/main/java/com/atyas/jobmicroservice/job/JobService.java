@@ -1,9 +1,11 @@
 package com.atyas.jobmicroservice.job;
 
+import com.atyas.jobmicroservice.job.dto.JobWithCompanyDTO;
+
 import java.util.List;
 
 public interface JobService {
-    List<Job> findAll();
+    List<JobWithCompanyDTO> findAll();
 
     void createJob(Job job);
 
