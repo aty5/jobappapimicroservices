@@ -3,6 +3,8 @@ package com.atyas.jobmicroservice.job.impl;
 import com.atyas.jobmicroservice.job.Job;
 import com.atyas.jobmicroservice.job.JobRepository;
 import com.atyas.jobmicroservice.job.JobService;
+import com.atyas.jobmicroservice.job.clients.CompanyClient;
+import com.atyas.jobmicroservice.job.clients.ReviewClient;
 import com.atyas.jobmicroservice.job.dto.JobDTO;
 import com.atyas.jobmicroservice.job.external.Company;
 import com.atyas.jobmicroservice.job.external.Review;
@@ -27,8 +29,15 @@ public class JobServiceImpl implements JobService {
     @Autowired
     RestTemplate restTemplate;
 
-    public JobServiceImpl(JobRepository jobRepository) {
+    private CompanyClient companyClient;
+    private ReviewClient reviewClient;
+
+    public JobServiceImpl(JobRepository jobRepository,
+                          CompanyClient companyClient,
+                          ReviewClient reviewClient) {
         this.jobRepository = jobRepository;
+        this.companyClient = companyClient;
+        this.reviewClient = reviewClient;
     }
 
     @Override
@@ -42,21 +51,9 @@ public class JobServiceImpl implements JobService {
 
     private JobDTO convertToDto(Job job){
 
-        Company company = restTemplate.getForObject(
-                "http://COMPANYMICROSERVICE:8081/companies/" + job.getCompanyId(),
-                Company.class
-        );
+        Company company = companyClient.getCompany(job.getCompanyId());
 
-        ResponseEntity<List<Review>> reviewResponse = restTemplate.exchange(
-                "http://reviewmicroservice:8083/reviews?companyId=" + job.getCompanyId(),
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<Review>>() {
-                }
-                );
-
-        List<Review> reviews = reviewResponse.getBody();
-
+        List<Review> reviews = reviewClient.getReviews(job.getCompanyId());
 
 
         JobDTO jobDTO = JobMapper.mapToJobWithCompanyDto(job, company, reviews);
