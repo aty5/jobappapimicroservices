@@ -1,12 +1,15 @@
-# JobAppApiMicroServices
+# JobAppApiMicroservices
 
-This app converts a monolithic REST API (https://github.com/aty5/jobappapi) into microservices.
+**Project objectives** :
+* Convert a monolithic REST API (https://github.com/aty5/jobappapi) into microservices architecture
+* Use it as a basis for learning new skills in microservices environments
 
-**Technical environment** :
+
+**Environment** :
 * Docker Engine + Docker Compose (Docker Desktop)
 * JDK17 / Maven / Tomcat
 * Spring Boot / Spring Data JPA / PostgreSQL
-* HTTP Client
+* HTTP Client (Postman,...)
 * Git
 
 ## Architecture
