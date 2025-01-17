@@ -7,7 +7,7 @@
 
 **Environment** :
 * Docker Engine + Docker Compose (Docker Desktop)
-* JDK17 / Maven / Tomcat
+* Java 17 / Maven / Tomcat
 * Spring Boot / Spring Data JPA / PostgreSQL
 * HTTP Client (Postman,...)
 * Git
